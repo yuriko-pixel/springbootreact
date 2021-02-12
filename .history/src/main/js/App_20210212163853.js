@@ -19,6 +19,9 @@ export class App extends Component {
             .then(data => {
                 const arr = data;
             	this.setState({users: arr});
+                const testarr =  [{id: 1, name: "Yuriko", surname: "Darragh", email: "test@gmail.com", username: "yuriko);↵"}];
+                console.log(testarr);
+                console.log(this.state.users);
             })
             .catch(() => {
                 console.log('通信に失敗しました。');
@@ -33,7 +36,7 @@ export class App extends Component {
                 <p>{this.state.username}</p>
                 <input type="button" onClick={()=>this.getUsers()}/>
                 {
-                    this.state.users.map(i=>{return (<div id={Math.random()}>{i.name}</div>)})
+	                   this.state.users.map(i=>{return (<div>{i.name}</div>)})
                 }
                 {this.state.test}
             </div>

@@ -10,6 +10,7 @@ module.exports = {
         filename: './src/main/resources/static/built/bundle.js',
         publicPath: __dirname
     },
+    proxy: 'https://localhost:8080',
 
     module: {
         rules: [

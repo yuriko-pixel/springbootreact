@@ -33,7 +33,7 @@ export class App extends Component {
                 <p>{this.state.username}</p>
                 <input type="button" onClick={()=>this.getUsers()}/>
                 {
-                    this.state.users.map(i=>{return (<div id={Math.random()}>{i.name}</div>)})
+                    this.state.users.map(i=>{return (<div id={i.id}>{i.name}</div>)})
                 }
                 {this.state.test}
             </div>

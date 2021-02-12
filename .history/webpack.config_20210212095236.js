@@ -8,8 +8,9 @@ module.exports = {
     output: {
         path: __dirname,
         filename: './src/main/resources/static/built/bundle.js',
-        publicPath: __dirname
+        publicPath: './src/main/resources/static/built/'
     },
+    proxy: 'https://localhost:8080'
 
     module: {
         rules: [

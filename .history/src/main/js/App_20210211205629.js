@@ -1,41 +1,37 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import axios from 'axios'
 
-const endpoint = 'http://localhost:8080/user/all ';
+const endpoint = '/user/all';
 
 
 export class App extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
-          users: []
+          users: {}
         };
       }
 
     getUsers() {
-        fetch(endpoint)
+        axios
+            .get(endpoint)
             .then((results) => results.json()
             )
             .then(data => {
-                const arr = data;
-            	this.setState({users: arr});
+                this.state = data;
+                console.log(this.state);
             })
             .catch(() => {
                 console.log('通信に失敗しました。');
             });
-    }
+    } 
 
     render() {
-        
-
         return (
             <div>
-                <p>{this.state.username}</p>
                 <input type="button" onClick={()=>this.getUsers()}/>
-                {
-                    this.state.users.map(i=>{return (<div id={Math.random()}>{i.name}</div>)})
-                }
-                {this.state.test}
             </div>
     );
     }

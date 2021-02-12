@@ -8,7 +8,8 @@ export class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          users: []
+          users: [],
+          test: ''
         };
       }
 
@@ -17,8 +18,11 @@ export class App extends Component {
             .then((results) => results.json()
             )
             .then(data => {
-                const arr = data;
-            	this.setState({users: arr});
+                const arr = [...this.state.users, data];
+                console.log(arr);
+                console.log(this.state.users == arr);
+            	this.setState({users: [...this.state.users, data]});
+                this.setState({test: 'TEST'})
             })
             .catch(() => {
                 console.log('通信に失敗しました。');
@@ -26,14 +30,14 @@ export class App extends Component {
     }
 
     render() {
-        
-
+        const testarr =  [{id: 1, name: "Yuriko", surname: "Darragh", email: "test@gmail.com", username: "yuriko);↵"}];
+    
         return (
             <div>
                 <p>{this.state.username}</p>
                 <input type="button" onClick={()=>this.getUsers()}/>
                 {
-                    this.state.users.map(i=>{return (<div id={Math.random()}>{i.name}</div>)})
+                   this.state.users.map(i=>{return (<ul><li key={Math.random()}>{i.name}</li></ul>)})
                 }
                 {this.state.test}
             </div>
