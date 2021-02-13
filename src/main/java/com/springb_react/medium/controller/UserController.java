@@ -27,9 +27,12 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/save")
-    public User saveUser(@RequestBody User user){
-        return this.userRepository.save(user);
+    @PostMapping(value="/save",produces = "application/json")
+    public String saveUser(@RequestBody User user){
+    	System.out.println(user);
+    	user.setId(1);
+        this.userRepository.save(user);
+        return "index";
     }
 
     @GetMapping("/all")
@@ -49,8 +52,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@RequestBody User newUser, @PathVariable(value = "id") Long id){
-        return this.userRepository.findById(id)
+    public User updateUser(@RequestBody User newUser, @PathVariable(value = "id") int id){
+        return this.userRepository.findById((long) id)
                 .map(user -> {
                     user.setName(newUser.getName());
                     user.setSurname(newUser.getSurname());

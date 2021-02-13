@@ -21,7 +21,6 @@ function App() {
             .then(data => {
                 const arr = data;
             	setUsers(arr);
-                console.log(data);
             })
             .catch(() => {
                 console.log('通信に失敗しました。');
@@ -33,53 +32,29 @@ function App() {
         console.log(targetValue);
         setUsername(target);
       }
-
+      
       const postData = (e)=> {
-          e.preventDefault();
-	      const body = JSON.stringify({
-	            "id": 2,
-	            "name": "Shaun",
-	            "surname": "Darragh",
-	            "username": "username",
-	            "email": "tekito",
-	            "password": "Password"
-	        });
-           
-            let dataReceived = ""; 
-            fetch(end, {
-                credentials: "same-origin",
-                mode: "same-origin",
-                method: "post",
-                headers: { "Content-Type": "application/json" },
-                body: body
-            })
-                .then(resp => {
-                    if (resp.status === 200) {
-                        return resp.json()
-                    } else {
-                        console.log("Status: " + resp.status)
-                        return Promise.reject("server")
-                    }
-                })
-                .then(dataJson => {
-                    dataReceived = JSON.parse(dataJson)
-                })
-                .catch(err => {
-                    if (err === "server") return
-                    console.log(err)
-                })
-            
-            console.log(`Received: ${dataReceived}`)       
-
-
+        e.preventdefault();
+        let xhr = new XMLHttpRequest();
+            xhr.open("POST", end);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onload = () => {
+                console.log(xhr.status);
+                console.log("success!");
+            };
+            xhr.onerror = () => {
+                console.log(xhr.status);
+                console.log("error!");
+            };
+            xhr.send({"id": 2, "name": "Shaun", "surname": "Darragh", "username": r_username, "email": "tekito", "password": "hai"});
       }
-
+      
     return (
         <div>
-        <input type="button" onClick={() => getUsers()}/>
-        <form  onSubmit={(e) => postData(e)}>
+        <input type="button" onClick={getUsers()}/>
+        <form>
             <input type="text" value={r_name} onChange={e=>{handleInputChange(e, "name")}} />
-            <input type="submit" value="submit"></input>
+            <input type="submit" value="submit" onSubmit={(e) => postData()}></input>
         </form>
         </div>
     )
@@ -91,17 +66,17 @@ export default App;
 // users.map(i=>{return (
 //     <form key={Math.random()} className="input-group" method="post" action="/user/save">
 //     <div className="data" name="id">{i.id}</div>
-//     <input type="text"
+//     <input type="text" 
 //         className="data" name="name" onChange={e=>handleInputChange(e,i.name)} defaultValue={i.name}/>
-//     <input type="text"
+//     <input type="text" 
 //         className="data" name="username" onChange={e=>handleInputChange(e,i.username)} defaultValue={i.username}/>
-//     <input type="text"
+//     <input type="text" 
 //         className="data" name="surname" onChange={e=>handleInputChange(e,i.surname)} defaultValue={i.surname}/>
-//     <input type="text"
+//     <input type="text" 
 //         className="data" name="email" onChange={e=>handleInputChange(e,i.email)} defaultValue={i.email}/>
-//     <input type="text"
+//     <input type="text" 
 //         className="data" name="password" onChange={e=>handleInputChange(e,i.password)} defaultValue={i.password}/>
-//     <input type="submit"
+//     <input type="submit" 
 //         className="data" value="submit" />
 //     </form>
 //         )})

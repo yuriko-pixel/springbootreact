@@ -33,47 +33,27 @@ function App() {
         console.log(targetValue);
         setUsername(target);
       }
-
+      
       const postData = (e)=> {
-          e.preventDefault();
-	      const body = JSON.stringify({
-	            "id": 2,
-	            "name": "Shaun",
-	            "surname": "Darragh",
-	            "username": "username",
-	            "email": "tekito",
-	            "password": "Password"
-	        });
-           
-            let dataReceived = ""; 
-            fetch(end, {
-                credentials: "same-origin",
-                mode: "same-origin",
-                method: "post",
-                headers: { "Content-Type": "application/json" },
-                body: body
-            })
-                .then(resp => {
-                    if (resp.status === 200) {
-                        return resp.json()
-                    } else {
-                        console.log("Status: " + resp.status)
-                        return Promise.reject("server")
-                    }
-                })
-                .then(dataJson => {
-                    dataReceived = JSON.parse(dataJson)
-                })
-                .catch(err => {
-                    if (err === "server") return
-                    console.log(err)
-                })
+        fetch(end, {method, headers, body}).then((res)=> res.json()).then(console.log).catch(console.error);
+        const method = "POST";
+        const body = JSON.stringify({
+            "id": 1,
+            "name": "Samp",
+            "surname": "Test",
+            "username": "username",
+            "email": "tekito",
+            "password": "Password"
+        });
+        const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        };
+        
             
-            console.log(`Received: ${dataReceived}`)       
-
-
+            getUsers();
       }
-
+      
     return (
         <div>
         <input type="button" onClick={() => getUsers()}/>
@@ -91,17 +71,17 @@ export default App;
 // users.map(i=>{return (
 //     <form key={Math.random()} className="input-group" method="post" action="/user/save">
 //     <div className="data" name="id">{i.id}</div>
-//     <input type="text"
+//     <input type="text" 
 //         className="data" name="name" onChange={e=>handleInputChange(e,i.name)} defaultValue={i.name}/>
-//     <input type="text"
+//     <input type="text" 
 //         className="data" name="username" onChange={e=>handleInputChange(e,i.username)} defaultValue={i.username}/>
-//     <input type="text"
+//     <input type="text" 
 //         className="data" name="surname" onChange={e=>handleInputChange(e,i.surname)} defaultValue={i.surname}/>
-//     <input type="text"
+//     <input type="text" 
 //         className="data" name="email" onChange={e=>handleInputChange(e,i.email)} defaultValue={i.email}/>
-//     <input type="text"
+//     <input type="text" 
 //         className="data" name="password" onChange={e=>handleInputChange(e,i.password)} defaultValue={i.password}/>
-//     <input type="submit"
+//     <input type="submit" 
 //         className="data" value="submit" />
 //     </form>
 //         )})

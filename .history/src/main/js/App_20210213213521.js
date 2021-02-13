@@ -36,10 +36,10 @@ function App() {
 
       const postData = (e)=> {
           e.preventDefault();
-	      const body = JSON.stringify({
-	            "id": 2,
-	            "name": "Shaun",
-	            "surname": "Darragh",
+	      const body = JSON.parse({
+	            "id": 1,
+	            "name": "Samp",
+	            "surname": "Test",
 	            "username": "username",
 	            "email": "tekito",
 	            "password": "Password"

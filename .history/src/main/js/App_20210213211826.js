@@ -35,41 +35,21 @@ function App() {
       }
 
       const postData = (e)=> {
-          e.preventDefault();
 	      const body = JSON.stringify({
-	            "id": 2,
-	            "name": "Shaun",
-	            "surname": "Darragh",
+	            "id": 1,
+	            "name": "Samp",
+	            "surname": "Test",
 	            "username": "username",
 	            "email": "tekito",
 	            "password": "Password"
 	        });
-           
-            let dataReceived = ""; 
-            fetch(end, {
-                credentials: "same-origin",
-                mode: "same-origin",
-                method: "post",
-                headers: { "Content-Type": "application/json" },
-                body: body
-            })
-                .then(resp => {
-                    if (resp.status === 200) {
-                        return resp.json()
-                    } else {
-                        console.log("Status: " + resp.status)
-                        return Promise.reject("server")
-                    }
-                })
-                .then(dataJson => {
-                    dataReceived = JSON.parse(dataJson)
-                })
-                .catch(err => {
-                    if (err === "server") return
-                    console.log(err)
-                })
-            
-            console.log(`Received: ${dataReceived}`)       
+        fetch(end, {method, headers, body}).then((res)=> res.json()).then(console.log).catch(console.error);
+        const method = "POST";
+
+        const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        };
 
 
       }

@@ -37,9 +37,9 @@ function App() {
       const postData = (e)=> {
           e.preventDefault();
 	      const body = JSON.stringify({
-	            "id": 2,
-	            "name": "Shaun",
-	            "surname": "Darragh",
+	            "id": 1,
+	            "name": "Samp",
+	            "surname": "Test",
 	            "username": "username",
 	            "email": "tekito",
 	            "password": "Password"
