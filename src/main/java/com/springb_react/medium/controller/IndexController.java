@@ -57,7 +57,7 @@ public class IndexController {
 	public String save(@RequestBody Post post) {
 		post.setHtml(markdownToHTML(post.getContent().replaceAll("\r","<br/>")));
 		post.setTitle("<h1>"+post.getTitle()+"</h1>");
-		post.setId((long) 1);
+		post.setId(1);
 		postService.savePost(post);
 		List<Post> postList = postService.getAllPosts();
 		for(Post p: postList) {
